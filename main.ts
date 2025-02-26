@@ -7,7 +7,7 @@ namespace SpriteKind {
 function map () {
     _1221 = sprites.create(assets.image`table3`, SpriteKind.table)
     _1221.setPosition(31, 28)
-    _0000 = sprites.create(assets.image`computer`, SpriteKind.computer)
+    _0000 = sprites.create(assets.image`Hello`, SpriteKind.computer)
     _0000.setPosition(31, 25)
     mySprite3 = sprites.create(assets.image`tree9`, SpriteKind.Player)
     mySprite3.setPosition(30, 85)
@@ -15,6 +15,7 @@ function map () {
     Burger.setPosition(126, 28)
     Plate = sprites.create(assets.image`Plate`, SpriteKind.Food)
     Plate.setPosition(126, 22)
+    tiles.setCurrentTilemap(tilemap`level2`)
 }
 controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
     scene.setBackgroundImage(img`
@@ -147,11 +148,12 @@ let Plate: Sprite = null
 let Burger: Sprite = null
 let mySprite3: Sprite = null
 let _0000: Sprite = null
-let mySprite: Sprite = null
 let Мікпмкіп: Sprite = null
+let mySprite: Sprite = null
 let _1221: Sprite = null
 effects.none.startScreenEffect()
-if (game.askForNumber("") == 1111) {
+if (game.askForNumber("Password", 4) == 1111) {
+    scene.cameraFollowSprite(mySprite)
     music.play(music.createSong(assets.song`melody`), music.PlaybackMode.LoopingInBackground)
     scene.setBackgroundImage(assets.image`backround`)
     map()
@@ -161,10 +163,13 @@ if (game.askForNumber("") == 1111) {
     controller.player2.moveSprite(mySprite)
     controller.player3.moveSprite(mySprite)
     controller.player4.moveSprite(mySprite)
-    game.showLongText(assets.image`computer`, DialogLayout.Full)
+    game.showLongText("Hello", DialogLayout.Full)
 } else {
     scene.setBackgroundImage(assets.image`black`)
     mySprite = sprites.create(assets.image`password incorect`, SpriteKind.Player)
     pause(5000)
     game.reset()
 }
+forever(function () {
+    scene.cameraFollowSprite(mySprite)
+})
